@@ -12,7 +12,7 @@ BiaZap is a multi-tenant SaaS API that connects to WhatsApp via the unofficial p
 
 | Property | Value |
 |----------|-------|
-| **Base URL** | `https://api.biazap.com` (or self-hosted) |
+| **Base URL** | `https://biazap.biasofia.com` (or self-hosted) |
 | **Auth** | JWT Bearer token or API key (`X-API-Key: bza_...`) |
 | **Port** | 8088 (default) |
 | **Async messaging** | All sends return `202` with `task_id` |
@@ -74,7 +74,7 @@ When a developer needs a BiaZap account, use this flow:
 
 ```bash
 # This is what the agent calls
-curl -X POST https://api.biazap.com/v1/auth/quick-register \
+curl -X POST https://biazap.biasofia.com/v1/auth/quick-register \
   -H "Content-Type: application/json" \
   -d '{"email": "dev@example.com"}'
 # Returns: { "api_key": "bza_...", "password": "...", ... }

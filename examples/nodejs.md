@@ -13,7 +13,7 @@ const axios = require('axios');
 class BiaZap {
   constructor({ baseUrl, token, apiKey }) {
     this.client = axios.create({
-      baseURL: baseUrl || 'https://api.biazap.com',
+      baseURL: baseUrl || 'https://biazap.biasofia.com',
       headers: apiKey
         ? { 'X-API-Key': apiKey }
         : { 'Authorization': `Bearer ${token}` },
@@ -177,7 +177,7 @@ app.listen(3000, () => console.log('Webhook server on port 3000'));
 const EventSource = require('eventsource');
 
 const es = new EventSource(
-  `https://api.biazap.com/v1/instances/${instanceId}/events?events=message.received`,
+  `https://biazap.biasofia.com/v1/instances/${instanceId}/events?events=message.received`,
   { headers: { 'Authorization': `Bearer ${token}` } }
 );
 
@@ -201,7 +201,7 @@ const BiaZap = require('./biazap');
 
 async function main() {
   // 1. Register company
-  const { data: reg } = await axios.post('https://api.biazap.com/v1/auth/register', {
+  const { data: reg } = await axios.post('https://biazap.biasofia.com/v1/auth/register', {
     company_name: 'My App',
     email: 'dev@myapp.com',
     password: 'SecurePass123!',

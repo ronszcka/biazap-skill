@@ -12,7 +12,7 @@ import uuid
 import requests
 
 class BiaZap:
-    def __init__(self, base_url="https://api.biazap.com", token=None, api_key=None):
+    def __init__(self, base_url="https://biazap.biasofia.com", token=None, api_key=None):
         self.base_url = base_url.rstrip("/")
         self.session = requests.Session()
         if api_key:
@@ -177,7 +177,7 @@ import requests
 import json
 
 def listen_events(instance_id, token, events_filter=None):
-    url = f"https://api.biazap.com/v1/instances/{instance_id}/events"
+    url = f"https://biazap.biasofia.com/v1/instances/{instance_id}/events"
     params = {}
     if events_filter:
         params["events"] = ",".join(events_filter)
@@ -204,7 +204,7 @@ from biazap import BiaZap
 
 # 1. Login
 import requests
-resp = requests.post("https://api.biazap.com/v1/auth/login", json={
+resp = requests.post("https://biazap.biasofia.com/v1/auth/login", json={
     "email": "dev@myapp.com", "password": "SecurePass123!"
 })
 token = resp.json()["token"]

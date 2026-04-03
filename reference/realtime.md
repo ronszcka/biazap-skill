@@ -33,7 +33,7 @@ data: {"event_id":"660e8400...","type":"message.delivered",...}
 
 ```javascript
 const eventSource = new EventSource(
-  `https://api.biazap.com/v1/instances/${instanceId}/events?events=message.received,message.sent`,
+  `https://biazap.biasofia.com/v1/instances/${instanceId}/events?events=message.received,message.sent`,
   { headers: { 'Authorization': `Bearer ${token}` } }
 );
 
@@ -55,7 +55,7 @@ eventSource.addEventListener('connection.update', (e) => {
 import EventSource from 'eventsource';
 
 const es = new EventSource(
-  `https://api.biazap.com/v1/instances/${instanceId}/events`,
+  `https://biazap.biasofia.com/v1/instances/${instanceId}/events`,
   { headers: { 'Authorization': `Bearer ${token}` } }
 );
 
@@ -89,7 +89,7 @@ Authorization: Bearer <token>
 
 ```javascript
 const ws = new WebSocket(
-  `wss://api.biazap.com/v1/instances/${instanceId}/ws?events=message.received`
+  `wss://biazap.biasofia.com/v1/instances/${instanceId}/ws?events=message.received`
 );
 
 // Auth via first message or header (depends on client library)
@@ -111,7 +111,7 @@ import websockets
 import json
 
 async def listen():
-    uri = f"wss://api.biazap.com/v1/instances/{instance_id}/ws"
+    uri = f"wss://biazap.biasofia.com/v1/instances/{instance_id}/ws"
     headers = {"Authorization": f"Bearer {token}"}
     
     async with websockets.connect(uri, extra_headers=headers) as ws:

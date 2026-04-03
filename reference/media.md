@@ -31,7 +31,7 @@ Authorization: Bearer <token>
 ### From URL
 
 ```bash
-curl -X POST "https://api.biazap.com/v1/instances/{id}/media" \
+curl -X POST "https://biazap.biasofia.com/v1/instances/{id}/media" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"url": "https://example.com/image.jpg"}'
@@ -47,7 +47,7 @@ Authorization: Bearer <token>
 Returns the raw file with appropriate `Content-Type` header.
 
 ```bash
-curl -o photo.jpg "https://api.biazap.com/v1/instances/{id}/media/{mediaId}" \
+curl -o photo.jpg "https://biazap.biasofia.com/v1/instances/{id}/media/{mediaId}" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -66,7 +66,7 @@ curl -o photo.jpg "https://api.biazap.com/v1/instances/{id}/media/{mediaId}" \
 After uploading, use the `media_id` in message endpoints:
 
 ```bash
-curl -X POST "https://api.biazap.com/v1/instances/{id}/messages/image" \
+curl -X POST "https://biazap.biasofia.com/v1/instances/{id}/messages/image" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: $(uuidgen)" \
