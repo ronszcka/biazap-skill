@@ -10,18 +10,39 @@ When a developer asks Claude to integrate WhatsApp messaging into their app, thi
 - Ready-to-use code examples (Node.js, Python)
 - Integration patterns (send-only, chatbot, real-time dashboard, multi-instance)
 - Best practices (HMAC verification, idempotency, rate limiting)
+- **Quick account creation** — just provide your email, get an API key instantly
 
 ## Install
 
 ```bash
-# Add to your project
-claude skill add github:ronszcka/biazap-api-skill
+npx skills add https://github.com/ronszcka/biazap-skill --skill biazap-api
 ```
 
-Or manually clone to your skills directory:
+### Alternative methods
 
 ```bash
-git clone https://github.com/ronszcka/biazap-api-skill ~/.claude/skills/biazap-api
+# Via Claude Code CLI
+claude skill add github:ronszcka/biazap-skill
+
+# Manual clone (personal — available in all projects)
+git clone https://github.com/ronszcka/biazap-skill ~/.claude/skills/biazap-api
+
+# Manual clone (project-only)
+git clone https://github.com/ronszcka/biazap-skill .claude/skills/biazap-api
+```
+
+### Update
+
+To update the skill to the latest version:
+
+```bash
+npx skills add https://github.com/ronszcka/biazap-skill --skill biazap-api
+```
+
+Or if manually cloned:
+
+```bash
+cd ~/.claude/skills/biazap-api && git pull
 ```
 
 ## Skill Structure
@@ -29,7 +50,7 @@ git clone https://github.com/ronszcka/biazap-api-skill ~/.claude/skills/biazap-a
 ```
 SKILL.md                        # Main skill (routing, patterns, endpoint map)
 reference/
-  auth.md                       # JWT, API keys, register, login
+  auth.md                       # JWT, API keys, quick-register, login
   messages.md                   # 14 message types with curl examples
   webhooks.md                   # 37 events with JSON payload examples
   instances.md                  # Instance lifecycle, QR code, pairing
@@ -49,6 +70,7 @@ Claude loads reference docs **on demand** — only what's needed for the develop
 
 After installing, just ask Claude:
 
+- *"Create a BiaZap account for me"* (asks your email, calls quick-register)
 - *"Integrate WhatsApp messaging into my Node.js app using BiaZap"*
 - *"Set up a webhook to receive WhatsApp messages"*
 - *"Send an image with caption via BiaZap API"*
@@ -59,11 +81,14 @@ After installing, just ask Claude:
 
 BiaZap is a multi-tenant SaaS WhatsApp API built in Go. It provides REST endpoints for messaging, groups, contacts, webhooks, and real-time events via the unofficial WhatsApp protocol.
 
-- **API**: REST with JWT/API key auth
-- **Messaging**: 14 message types (text, image, video, audio, document, sticker, location, contact, reaction, poll, template, forward, delete, edit)
-- **Events**: 37 webhook event types with HMAC-SHA256 signing
-- **Real-time**: SSE + WebSocket with 100-event replay buffer
-- **Rate limiting**: Per-company, plan-based
+| Feature | Details |
+|---------|---------|
+| **Base URL** | `https://biazap.biasofia.com` |
+| **Auth** | JWT Bearer or API key (`X-API-Key: bza_...`) |
+| **Messaging** | 14 types: text, image, video, audio, document, sticker, location, contact, reaction, poll, template, forward, delete, edit |
+| **Events** | 37 webhook event types with HMAC-SHA256 signing |
+| **Real-time** | SSE + WebSocket with 100-event replay buffer |
+| **Rate limiting** | Per-company, plan-based (default 60 req/min) |
 
 ## License
 
