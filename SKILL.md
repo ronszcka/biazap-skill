@@ -62,6 +62,24 @@ Follow these rules when writing BiaZap integration code:
 8. **Store `task_id`** — For tracking message delivery status
 9. **Use API keys for server-to-server** — JWT for user sessions, API keys for backends
 
+## Agent Onboarding Flow
+
+When a developer needs a BiaZap account, use this flow:
+
+1. **Ask for their email**: "What email should I use to create your BiaZap account?"
+2. **Call quick-register**: `POST /v1/auth/quick-register` with `{"email": "their@email.com"}`
+3. **Save the API key** from the response — use it for all subsequent calls
+4. **Tell the developer**: "Account created! API key: `bza_xxx...`. Credentials also sent to your email."
+5. **Continue integration** using the API key
+
+```bash
+# This is what the agent calls
+curl -X POST https://api.biazap.com/v1/auth/quick-register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "dev@example.com"}'
+# Returns: { "api_key": "bza_...", "password": "...", ... }
+```
+
 ## Integration Patterns
 
 ### Pattern 1: Send-Only (Notifications)

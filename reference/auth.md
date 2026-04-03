@@ -3,6 +3,37 @@
 **Base URL:** `https://biazap.biasofia.com` (production) | `http://localhost:8088` (development)
 **Format:** JSON (`Content-Type: application/json`)
 
+## Quick Register (Recommended for Agent Onboarding)
+
+The fastest way to create an account. Only requires an email:
+
+```
+POST /v1/auth/quick-register
+```
+
+```bash
+curl -X POST https://api.biazap.com/v1/auth/quick-register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "dev@example.com"}'
+```
+
+**Response (201):**
+```json
+{
+  "company_id": 1,
+  "api_key": "bza_a1b2c3d4e5f6...",
+  "email": "dev@example.com",
+  "password": "4f8b2c1a9e3d7f06",
+  "base_url": "https://api.biazap.com",
+  "message": "account created — credentials sent to your email"
+}
+```
+
+Auto-generates: company name (from email domain), owner name, 16-char password, API key.
+Sends welcome email via SendGrid with credentials and quick start guide.
+
+**IMPORTANT for LLM agents:** Ask the user for their email, call this endpoint, then use the returned `api_key` for all subsequent API calls. The password is for dashboard login only.
+
 ## Authentication Methods
 
 BiaZap supports two authentication methods: JWT Bearer tokens and API keys.
